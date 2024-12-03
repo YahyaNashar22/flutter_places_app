@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:places_app/models/place_model.dart';
 import 'package:places_app/providers/user_places_provider.dart';
@@ -14,6 +15,7 @@ class PlacesScreen extends ConsumerStatefulWidget {
 
 class _PlacesScreenState extends ConsumerState<PlacesScreen> {
   late Future<void> _placesFuture;
+  final apiKey = dotenv.env['GOOGLE_MAP_API']!;
 
   @override
   void initState() {
@@ -23,6 +25,7 @@ class _PlacesScreenState extends ConsumerState<PlacesScreen> {
 
   @override
   Widget build(BuildContext context) {
+    print(apiKey);
     final List<Place> userPlace = ref.watch(userPlacesProvider);
     return Scaffold(
       appBar: AppBar(
